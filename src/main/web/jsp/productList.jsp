@@ -21,6 +21,9 @@
 <body ng-app="app" ng-controller="ProductListController">
 
     <div class="container">
+        <div ng-repeat='m in messages'>
+            <p style="color:green;">{{m.message}}</p>
+        </div>
         <div class="row">
             <div class="col-sm-8 center-block">
                 <br>
@@ -43,6 +46,11 @@
                 </div>
             </div>
         </div>
+        <span>
+            <button class="btn btn-info" ng-click="randomize()">Randomize</button>
+            <button class="btn btn-info" ng-click="refresh()">Refresh</button>
+            <button class="btn btn-info" ng-click="logout()">Logout</button>
+        </span>
     </div>
 
     

@@ -29,13 +29,13 @@
                         <thead>
                             <tr>
                                 <th>
-                                    User
+                                    Users
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="user in users">
-                                <th><a class="nav-link" href="./productList.jsp?nick={{user.name}}">{{user.name}}<span class="sr-only"></span></a></th>
+                                <th><button class="btn btn-info" ng-click="login(user.name)">{{user.name}}</button></th>
                             </tr>
                         </tbody>
                     </table>
