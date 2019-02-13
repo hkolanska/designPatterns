@@ -35,7 +35,7 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="user in users">
-                                <th><a class="nav-link" href="./login?nick={{user.name}}">{{user.name}}<span class="sr-only"></span></a></th>
+                                <th><a class="nav-link" href="./productList.jsp?nick={{user.name}}">{{user.name}}<span class="sr-only"></span></a></th>
                             </tr>
                         </tbody>
                     </table>

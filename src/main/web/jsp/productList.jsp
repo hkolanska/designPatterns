@@ -28,10 +28,8 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>
-                                    <th ng-repeat='header in ["Name", "Price"]'>
-                                        {{header}}
-                                    </th>
+                                <th ng-repeat='header in ["Name", "Price"]'>
+                                    {{header}}
                                 </th>
                             </tr>
                         </thead>
