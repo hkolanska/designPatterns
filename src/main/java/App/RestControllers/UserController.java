@@ -7,6 +7,7 @@ import App.Model.Product;
 import App.Model.User;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,7 +28,8 @@ public class UserController {
     ProductDAOImpl productDAO = new ProductDAOImpl();
     UserDAOimpl userDAO = new UserDAOimpl();
     Facade facade = new Facade();
-
+    
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping("/refresh")
     public JSONObject refresh(@RequestParam(value = "nick") String nick) {
         JSONArray ja = new JSONArray();
@@ -46,6 +48,7 @@ public class UserController {
         return json;
     }
 
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping("/setRandomRandom")
     public JSONObject random(@RequestParam(value = "nick") String nick) {
         int number = new Random().nextInt(productDAO.getProducts().size());
@@ -56,6 +59,8 @@ public class UserController {
         facade.addNotification(facade.createNewNotification(productDAO.getProducts().get(number), userDAO.getUserFromNick(nick),recivers));
         return json;
     }
+
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping("/getUsers")
     public JSONObject getUsers() {
         LinkedList<User> users = userDAO.getUsers();
@@ -71,6 +76,8 @@ public class UserController {
         json.put("users",ja);
         return json;
     }
+
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping("/login")
     public JSONObject login(@RequestParam(value = "nick") String nick) {
         userDAO.changeStatus(nick);
