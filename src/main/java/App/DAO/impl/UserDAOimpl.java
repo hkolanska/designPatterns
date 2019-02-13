@@ -1,17 +1,14 @@
 package App.DAO.impl;
 
-import App.DAO.UserDAO;
 import App.Model.User;
 import lombok.Getter;
 
-import javax.sql.DataSource;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.sql.*;
 import java.util.LinkedList;
 
-public class UserDAOimpl implements UserDAO {
+public class UserDAOimpl  {
     @Getter
     private LinkedList<User> users = new LinkedList<>();
     public UserDAOimpl(){

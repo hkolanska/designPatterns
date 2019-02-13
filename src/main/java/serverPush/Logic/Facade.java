@@ -6,8 +6,6 @@ import serverPush.Model.notification;
 import serverPush.Model.notificationBuilder;
 import serverPush.Model.piggy;
 import serverPush.Model.piggyBuilder;
-
-import javax.management.Notification;
 import java.util.LinkedList;
 
 public class Facade {
@@ -27,17 +25,19 @@ public class Facade {
         return notsToSend.build();
     }
 
-    public notification createNewNotification(Product product,User user,LinkedList<User> toSend){
+    public notification createNewNotification(String name,double price,User user,LinkedList<User> toSend){
         notificationBuilder notB = new notificationBuilder();
         notB.addText(user.getNickname().toString());
         notB.addText(" changed price of ");
-        notB.addText(product.getName());
+        notB.addText(name);
         notB.addText(". The new price is ");
-        notB.addText(Double.toString(product.getPrice()));
+        notB.addText(Double.toString(price));
         notB.setToSend(toSend);
         return notB.build();
     }
     public void addNotification(notification not){
         notifications.add(not);
     }
+
+
 }

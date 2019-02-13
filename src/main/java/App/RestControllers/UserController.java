@@ -1,8 +1,9 @@
 package App.RestControllers;
 
 
-import App.DAO.impl.ProductDAOImpl;
+import App.DAO.impl.ProductImpl;
 import App.DAO.impl.UserDAOimpl;
+import App.Model.Observer;
 import App.Model.Product;
 import App.Model.User;
 import org.json.simple.JSONArray;
@@ -12,23 +13,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import serverPush.Logic.Facade;
-import serverPush.Model.notification;
 import serverPush.Model.piggy;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.LinkedList;
 import java.util.Random;
 
 @RestController
-public class UserController {
-    ProductDAOImpl productDAO = new ProductDAOImpl();
+public class UserController implements Observer{
+    ProductImpl productDAO = new ProductImpl();
     UserDAOimpl userDAO = new UserDAOimpl();
     Facade facade = new Facade();
 
+    @Override
+    public void update(String nameP,Double priceP,String nick) {
+        User user = userDAO.getUserFromNick(nick);
+        LinkedList<User> recivers = userDAO.getRecivers(nick);
+        facade.addNotification(facade.createNewNotification(nameP,priceP, userDAO.getUserFromNick(nick), recivers));
+    }
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping("/refresh")
     public JSONObject refresh(@RequestParam(value = "nick") String nick) {
@@ -53,10 +53,8 @@ public class UserController {
     public JSONObject random(@RequestParam(value = "nick") String nick) {
         int number = new Random().nextInt(productDAO.getProducts().size());
         productDAO.getProducts().get(number).setPrice(new Random().nextInt(100)+new Random().nextInt(100)*0.01);
-        JSONObject json = refresh(nick);
-        User user =userDAO.getUserFromNick(nick);
-        LinkedList<User> recivers = userDAO.getRecivers(nick);
-        facade.addNotification(facade.createNewNotification(productDAO.getProducts().get(number), userDAO.getUserFromNick(nick),recivers));
+        JSONObject json = new JSONObject();
+        json.put("operation completed","true");
         return json;
     }
 
