@@ -28,7 +28,7 @@ public class UserController {
     ProductDAOImpl productDAO = new ProductDAOImpl();
     UserDAOimpl userDAO = new UserDAOimpl();
     Facade facade = new Facade();
-    
+
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping("/refresh")
     public JSONObject refresh(@RequestParam(value = "nick") String nick) {
@@ -80,11 +80,24 @@ public class UserController {
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping("/login")
     public JSONObject login(@RequestParam(value = "nick") String nick) {
-        userDAO.changeStatus(nick);
+        userDAO.changeStatusIn(nick);
         System.out.println(userDAO.toString());
-        JSONObject json = refresh(nick);
+        JSONObject json = new JSONObject();
+        json.put("operation completed","true");
         return json;
     }
+
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @RequestMapping("/logout")
+    public JSONObject logout(@RequestParam(value = "nick") String nick) {
+        userDAO.changeStatusOut(nick);
+        System.out.println(userDAO.toString());
+        JSONObject json = new JSONObject();
+        json.put("operation completed","true");
+
+        return json;
+    }
+
 
 
 }

@@ -28,10 +28,18 @@ public class UserDAOimpl implements UserDAO {
 
 
     }
-    public void changeStatus(String nickname){
+    public void changeStatusIn(String nickname){
         for(int i=0;i<users.size();i++){
             if(users.get(i).getNickname().equals(nickname)){
                 users.get(i).setInApp(true);
+            }
+        }
+    }
+
+    public void changeStatusOut(String nickname){
+        for(int i=0;i<users.size();i++){
+            if(users.get(i).getNickname().equals(nickname)){
+                users.get(i).setInApp(false);
             }
         }
     }
