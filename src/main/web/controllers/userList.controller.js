@@ -14,6 +14,25 @@
                 console.log(response);
             });
 
+
+        $scope.login = login;
+    
+
+        function login(username) {
+            
+            var url = "http://192.168.192.54:8080/login?nick="+username;
+
+            $http.get(url)
+            .then(function(response){
+                console.log(response);
+                window.location.href = './productList.jsp?nick='+username;
+
+            }, function(response){
+                console.log(response);
+
+            })
+        };
+
     }]);
 
 })();
