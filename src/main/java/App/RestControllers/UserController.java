@@ -58,7 +58,6 @@ public class UserController {
     }
     @RequestMapping("/getUsers")
     public JSONObject getUsers() {
-        System.out.println(userDAO.toString());
         LinkedList<User> users = userDAO.getUsers();
         JSONObject json;
         JSONArray ja = new JSONArray();

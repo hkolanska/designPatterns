@@ -18,6 +18,5 @@ public class notification {
     }
     public void removeUserFromToSend(User user){
         toSend.remove(user);
-
     }
 }

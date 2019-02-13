@@ -20,6 +20,7 @@ public class Facade {
             for (int j=0;j<notifications.get(i).getToSend().size();j++){
                 if(notifications.get(i).getToSend().get(j).equals(user)){
                     notsToSend.addNot(notifications.get(i));
+                    notifications.get(i).removeUserFromToSend(user);
                 }
             }
         }

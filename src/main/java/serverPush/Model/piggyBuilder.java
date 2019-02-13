@@ -16,15 +16,19 @@ public class piggyBuilder {
         notificationContent.add(not.getBody());
     }
     public piggy build(){
-        JSONObject returnStatement = new JSONObject();
+        JSONObject json;
         JSONArray ja = new JSONArray();
         for(int i=0;i<notificationContent.size();i++){
-            returnStatement.put("message",notificationContent.get(i));
-            ja.add(returnStatement);
+            json = new JSONObject();
+            json.put("message",notificationContent.get(i));
+            ja.add(json);
+            System.out.println(ja);
+            System.out.println(ja.toString());
         }
-        returnStatement = new JSONObject();
+        JSONObject returnStatement = new JSONObject();
         returnStatement.put("messages",ja);
-
+        System.out.println(returnStatement);
+        System.out.println(returnStatement.toString());
         return new piggy(returnStatement);
     }
 
