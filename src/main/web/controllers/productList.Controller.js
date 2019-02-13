@@ -65,10 +65,8 @@
             $http.get(url)
             .then(function(response){
                 console.log(response);
-
             }, function(response){
                 console.log(response);
-
             })
 
             var url = "http://192.168.192.54:8080/refresh?nick="+name;
