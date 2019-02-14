@@ -1,5 +1,8 @@
 package App.DAO.impl;
 
+import App.Model.ObserverImpl;
+import App.Model.Product;
+import App.RestControllers.UserController;
 import lombok.Getter;
 
 import java.io.BufferedReader;
@@ -18,12 +21,18 @@ public class ProductImpl  {
             String line;
             while ((line = file.readLine())!=null){
                 String[] pr =line.split(" ");
-                products.add(new App.Model.Product(pr[0],Double.valueOf(pr[1])));
+                Product product = new Product(pr[0],Double.valueOf(pr[1]));
+                products.add(product);
             }
         }
         catch(Exception e){e.printStackTrace();}
 
 
+    }
+    public void updateObserver(ObserverImpl o){
+        for(int i=0;i<products.size();i++){
+            products.get(i).attach(o);
+        }
     }
 
 

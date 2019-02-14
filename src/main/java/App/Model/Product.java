@@ -12,7 +12,7 @@ public class Product  implements Subject{
     private String name;
     @Getter @Setter
     private double price;
-    private LinkedList<UserController> observers;
+    private Observer observer;
 
     public Product(String name, double price) {
         this.name = name;
@@ -21,12 +21,12 @@ public class Product  implements Subject{
 
     @Override
     public void attach(Observer o) {
-
+        observer=o;
     }
 
     @Override
     public void detach(Observer o) {
-
+        observer=null;
     }
 
     public void changePrice(Double price, String name){
@@ -36,9 +36,8 @@ public class Product  implements Subject{
 
     @Override
     public void notifyObservers(String nick) {
-        for (int i=0;i<observers.size();i++){
-            observers.get(i).update(name,price,nick);
-        }
+            observer.update(name,price,nick);
+
 
     }
 }
